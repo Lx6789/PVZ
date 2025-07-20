@@ -33,5 +33,4 @@ public class ChooseCardPanel : MonoBehaviour
         sunNumber += sun;
         sunNumberText.text = sunNumber.ToString();
     }
-
 }

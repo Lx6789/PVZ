@@ -47,9 +47,8 @@ public class Card : MonoBehaviour
     private bool IsCardEnabled()
     {
         //冷却时间是否结束，及阳光是否充足
-        if (progress.GetComponent<Image>().fillAmount == 0 && SunlightSufficientQuantity())
+        if (IsWaitOver() && SunlightSufficientQuantity())
         {
-            timer = 0;
             isWait = false;
             return true;
         } 
@@ -58,6 +57,13 @@ public class Card : MonoBehaviour
             isWait = true;
             return false;
         }
+    }
+
+    //判断冷却是否结束
+    private bool IsWaitOver()
+    {
+        if (waitTime <= timer) return true;
+        return false;
     }
 
     //判断阳光是否充足
@@ -112,32 +118,54 @@ public class Card : MonoBehaviour
     }
 
     //拖拽结束（鼠标松开）
-    public void OnEndDrag(BaseEventData data) 
+    public void OnEndDrag(BaseEventData data)
     {
-        if (curGameObject != null) 
+        if (curGameObject == null) return;
+        PointerEventData pointerEventData = data as PointerEventData;
+
+        // 拿到鼠标所在位置的碰撞体
+        Collider2D[] col = Physics2D.OverlapPointAll(TranslaterScreenToWorld(pointerEventData.position));
+
+        foreach (Collider2D c in col)
         {
-            PointerEventData pointerEventData = data as PointerEventData;
-            //拿到鼠标所在位置的碰撞体
-            Collider2D[] col = Physics2D.OverlapPointAll(TranslaterScreenToWorld(pointerEventData.position));
-            //遍历碰撞体
-            foreach (Collider2D c in col)
+            if (c.tag == "Land" && c.transform.childCount == 0)
             {
-                if (c.tag == "Land" && c.transform.childCount == 0)
+                // 把当前物体设置为格子的子物体
+                curGameObject.transform.parent = c.transform;
+                curGameObject.transform.localPosition = Vector3.zero;
+
+                // 动态获取组件并调用方法（组件名 = GameObject 的名字）
+                string componentName = curGameObject.name.Replace("(Clone)", ""); // 假设组件名和 GameObject 名相同
+                Component targetComponent = curGameObject.GetComponent(componentName);
+                //Debug.Log(targetComponent);
+                if (targetComponent != null)
                 {
-                    //把当前物体设置为格子的子物体
-                    curGameObject.transform.parent = c.transform;
-                    curGameObject.transform.localPosition = Vector3.zero;
-                    curGameObject = null;
-                    ChooseCardPanel.instance.UpdateSunNumber(-needSunlightNumber);
-                    break;
-                } 
+                    // 反射调用 "SeccessPlanting" 方法
+                    System.Reflection.MethodInfo method = targetComponent.GetType().GetMethod("SeccessPlanting");
+                    if (method != null)
+                    {
+                        method.Invoke(targetComponent, null); // 调用无参方法
+                    }
+                    else
+                    {
+                        Debug.LogError($"未找到方法: SeccessPlanting");
+                    }
+                }
                 else
                 {
-                    GameObject.Destroy(curGameObject);
-                    curGameObject = null;
+                    Debug.LogError($"未找到组件: {componentName}");
                 }
+
+                ChooseCardPanel.instance.UpdateSunNumber(-needSunlightNumber);
+                curGameObject = null; // 清空引用
+                timer = 0;
+                return; // 成功放置后直接返回
             }
         }
+
+        // 如果未放置到合法位置，销毁对象
+        GameObject.Destroy(curGameObject);
+        curGameObject = null;
     }
 
     //将鼠标坐标转换为世界坐标

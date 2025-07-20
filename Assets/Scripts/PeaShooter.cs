@@ -19,8 +19,10 @@ public class PeaShooter : MonoBehaviour
     [Header("预制体")]
     public GameObject gamePrefab;
 
-    private GameObject curGamePrefab;
+    [Header("是否种植成功")]
+    private bool isSuccessPatting = false;
 
+    private GameObject curGamePrefab;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class PeaShooter : MonoBehaviour
 
     private void Update()
     {
+        if (!isSuccessPatting) return;
         Timer();
     }
 
@@ -55,4 +58,9 @@ public class PeaShooter : MonoBehaviour
         curGamePrefab.transform.localPosition = new Vector3(0.4f, 0.2f, 0);
     }
 
+    //确认种植成功
+    public void SeccessPlanting()
+    {
+        isSuccessPatting = true;
+    }
 }
