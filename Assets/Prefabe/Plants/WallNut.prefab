@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6901624299789197669}
   - component: {fileID: 7279597205806565094}
   - component: {fileID: 2040216373705047965}
+  - component: {fileID: 6195494941293941643}
   m_Layer: 0
   m_Name: WallNut
   m_TagString: Untagged
@@ -95,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 3568495640067159236}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae289c780283f774e8cec3988e1249cc, type: 2}
+  m_Controller: {fileID: 9100000, guid: cba68fe481933454cb7e91d2fb787a8c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,3 +107,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6195494941293941643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568495640067159236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a162fd93df15b47af30f4b0ffb44c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 30
+  animator: {fileID: 2040216373705047965}
+  curHelth: 0

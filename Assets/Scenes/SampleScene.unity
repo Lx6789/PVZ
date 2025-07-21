@@ -1296,7 +1296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sunNumberText: {fileID: 68470167}
-  sunNumber: 1000
+  sunNumber: 50
+  x: 0
   cardNumber: 0
 --- !u!1 &519420028
 GameObject:
@@ -1879,7 +1880,7 @@ GameObject:
   - component: {fileID: 733873346}
   - component: {fileID: 733873347}
   m_Layer: 0
-  m_Name: Line1
+  m_Name: Line2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2191,7 +2192,7 @@ GameObject:
   - component: {fileID: 959056024}
   - component: {fileID: 959056025}
   m_Layer: 0
-  m_Name: Line0
+  m_Name: Line1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4526,6 +4527,51 @@ MonoBehaviour:
   m_Spacing: {x: 0.06, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &1919381177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1919381179}
+  - component: {fileID: 1919381178}
+  m_Layer: 0
+  m_Name: SunManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1919381178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919381177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6967026ff7fd6464bb8ddb456565b3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sunPrefab: {fileID: 6638582337401810939, guid: 6096d110202f71e4385b786ac0b54ecc, type: 3}
+--- !u!4 &1919381179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919381177}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6613815, y: -3.0936906, z: -0.87061596}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921235256
 GameObject:
   m_ObjectHideFlags: 0
@@ -5423,10 +5469,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 563804849}
     m_Modifications:
-    - target: {fileID: 1864130579080493216, guid: e929a26ab775741479164226dafaa1bf, type: 3}
-      propertyPath: objectPrefab
-      value: 
-      objectReference: {fileID: 8937668041952428721, guid: ded0a934845caca44a28fd69940d7ccb, type: 3}
     - target: {fileID: 1917325551094615475, guid: e929a26ab775741479164226dafaa1bf, type: 3}
       propertyPath: m_Name
       value: SunflowerCard
@@ -5719,3 +5761,4 @@ SceneRoots:
   - {fileID: 1015889340}
   - {fileID: 1773064707}
   - {fileID: 352922152}
+  - {fileID: 1919381179}

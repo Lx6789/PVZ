@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class Sunshine : MonoBehaviour
 {
@@ -36,33 +37,28 @@ public class Sunshine : MonoBehaviour
     private void OnMouseDown()
     {
         if (isMoving) return; // 防止重复点击
-
-        // 开始移动协程
-        StartCoroutine(MoveToTarget());
+        isMoving = true;
+        transform.DOMove(ChooseCardPanel.instance.GetSunPointTextPosition(), moveDuration).OnComplete(
+            () => 
+            {
+                ChooseCardPanel.instance.UpdateSunNumber(sunshineNumber);
+                Destroy(this.gameObject);
+            }
+            );
     }
 
-    // 阳光平滑移动到目标位置
-    private IEnumerator MoveToTarget()
+    
+    public void JumpTop(Vector3 targetPos)
     {
-        isMoving = true;
-        Vector3 startPos = position;
-        float elapsedTime = 0f;
+        Vector3 centerPos = (transform.position + targetPos) / 2;
+        float distance = Vector3.Distance(transform.position, targetPos);
+        centerPos.y += (distance / 2);
+        transform.DOPath(new Vector3[] { transform.position, centerPos, targetPos }, 
+            moveDuration, PathType.CatmullRom).SetEase(Ease.OutQuad);
+    }
 
-        while (elapsedTime < moveDuration)
-        {
-            // 计算插值比例（0~1）
-            float t = elapsedTime / moveDuration;
-            transform.position = Vector3.Lerp(startPos, position, t);
-
-            elapsedTime += Time.deltaTime;
-            yield return null; // 等待下一帧
-        }
-
-        // 确保最终位置精确
-        transform.position = position;
-
-        // 更新阳光数值并销毁自身
-        ChooseCardPanel.instance.UpdateSunNumber(sunshineNumber);
-        Destroy(gameObject);
+    public void LinearTo(Vector3 targetPos)
+    {
+        transform.DOMove(targetPos, moveDuration);
     }
 }

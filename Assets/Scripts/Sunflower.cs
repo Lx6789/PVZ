@@ -15,6 +15,8 @@ public class Sunflower : MonoBehaviour
     public Color targetColor = Color.red; // 目标颜色（默认白色，代表最亮）
     public float duration = 5f;           // 持续时间（秒）
     private Color startColor;
+    public float jumpMinDistance = 0.3f;
+    public float jumpMaxDistance = 2f;
 
     [Header("获取组件")]
     public SpriteRenderer spriteRenderer;
@@ -26,7 +28,7 @@ public class Sunflower : MonoBehaviour
     private void Start()
     {
         startColor = spriteRenderer.color;
-        interval = Random.Range(10f, 30f); // 初始化间隔时间
+        interval = Random.Range(10f, 20f); // 初始化间隔时间
     }
 
     private void Update()
@@ -66,10 +68,13 @@ public class Sunflower : MonoBehaviour
         }
         spriteRenderer.color = targetColor;
 
-        // 生成阳光（位置在向日葵上方）
-        Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
-        curSunshinePrefab = Instantiate(sunshinePrefab, spawnPos, Quaternion.identity);
+        curSunshinePrefab = Instantiate(sunshinePrefab, transform.position, Quaternion.identity);
         curSunshinePrefab.transform.SetParent(transform); // 设为子物体
+        float distance = Random.Range(jumpMinDistance, jumpMaxDistance);
+        distance = Random.Range(0, 2) < 1 ? -distance : distance;
+        Vector3 position = transform.position;
+        position.x += distance; 
+        curSunshinePrefab.GetComponent<Sunshine>().JumpTop(position);
         
         // 重置状态
         spriteRenderer.color = startColor; // 恢复初始颜色

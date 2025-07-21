@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190e77493e1a0d045bbdb17f5452f2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 8937668041952428721, guid: ded0a934845caca44a28fd69940d7ccb, type: 3}
   waitTime: 10
   needSunlightNumber: 50
 --- !u!114 &1535501704070442507
