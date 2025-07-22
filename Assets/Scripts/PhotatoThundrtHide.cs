@@ -17,6 +17,11 @@ public class PhotatoThundrtHide : MonoBehaviour
     public bool isSuccessPatting = false;
     private bool isHide = true;
 
+    private void Start()
+    {
+        curHP = HP;
+    }
+
     private void Update()
     {
         if (!isSuccessPatting) return;

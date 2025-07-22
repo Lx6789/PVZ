@@ -121,8 +121,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  interval: 1
+  interval: 2
   gamePrefab: {fileID: 1773875130456672461, guid: 99f162ee6cba6fa4e9cd31ec46f3121a, type: 3}
+  detectDistance: 13
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!61 &8683050979695042521
 BoxCollider2D:
   m_ObjectHideFlags: 0

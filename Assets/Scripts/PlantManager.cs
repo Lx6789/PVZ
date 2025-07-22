@@ -9,7 +9,7 @@ public class PlantManager : MonoBehaviour
     private void Awake() => instance = this;
 
     // 修改植物血量（通过反射）
-    public void TakeDamage(float damage, GameObject plant)
+    public void TakeDamage(float damage, GameObject plant, GameObject zm)
     {
         Component targetComponent = DynamicCallComponent(plant);
         if (targetComponent == null)
@@ -36,7 +36,11 @@ public class PlantManager : MonoBehaviour
 
         float currentHP = (float)propertyInfo.GetValue(targetComponent);
         propertyInfo.SetValue(targetComponent, currentHP - damage);
-        if (currentHP <= 0) Destroy(plant);
+        if (currentHP <= 0)
+        {
+            zm.GetComponent<ZM>().StopAttack();
+            Destroy(plant);
+        }
         Debug.Log($"{plant.name} 受到 {damage} 伤害，剩余血量: {currentHP - damage}");
     }
 

@@ -28,6 +28,7 @@ public class Sunflower : MonoBehaviour
 
     private void Start()
     {
+        curHP = HP;
         startColor = spriteRenderer.color;
         interval = Random.Range(10f, 20f); // 初始化间隔时间
     }

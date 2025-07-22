@@ -83,7 +83,7 @@ public class ZM : MonoBehaviour
     }
 
     // 停止攻击方法
-    private void StopAttack()
+    public void StopAttack()
     {
         if (attackCoroutine != null)
         {
@@ -102,7 +102,7 @@ public class ZM : MonoBehaviour
     {
         while (isAttacking && currentTarget != null)  // 持续攻击条件
         {
-            PlantManager.instance.TakeDamage(attackPower, currentTarget);  // 对植物造成伤害
+            PlantManager.instance.TakeDamage(attackPower, currentTarget, gameObject);  // 对植物造成伤害
             yield return new WaitForSeconds(attackInterval);  // 等待攻击间隔
         }
     }
@@ -143,7 +143,7 @@ public class ZM : MonoBehaviour
     // 更新动画参数方法
     private void UpdateAnimator(bool isWalking, bool isEating, bool isDead)
     {
-        animator.SetBool("Walk", isWalking);  // 设置行走状态
+        animator.SetBool("Wark", isWalking);  // 设置行走状态
         animator.SetBool("Eat", isEating);    // 设置进食状态
         animator.SetBool("Dead", isDead);     // 设置死亡状态
     }

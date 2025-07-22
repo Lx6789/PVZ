@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1409246335668024221}
   - component: {fileID: 8182457690422918478}
   - component: {fileID: 7176492986516837002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZM1
   m_TagString: ZM
   m_Icon: {fileID: 0}
@@ -168,9 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody2d: {fileID: 7176492986516837002}
   animator: {fileID: 1294910718084812984}
-  moveSpeed: 1.5
+  moveSpeed: 1
   attackPower: 10
-  health: 100
+  maxHealth: 100
+  attackInterval: 1
 --- !u!50 &7176492986516837002
 Rigidbody2D:
   serializedVersion: 4
