@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Land
   - Bullet
+  - ZM
+  - Plant
   layers:
   - Default
   - TransparentFX

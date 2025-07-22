@@ -12,7 +12,6 @@ public class Card : MonoBehaviour
 
     [Header("卡片对应的预制体")]
     public GameObject objectPrefab;
-
     private GameObject curGameObject; //克隆出的实际物体
 
     [Header("时间计时器")]
@@ -105,8 +104,7 @@ public class Card : MonoBehaviour
     {
         if (!IsCardEnabled()) return;
         PointerEventData pointerEventData = data as PointerEventData;
-        curGameObject = Instantiate(objectPrefab);
-        curGameObject.transform.position = TranslaterScreenToWorld(pointerEventData.position);
+        curGameObject = PlantManager.instance.CreatePlant(TranslaterScreenToWorld(pointerEventData.position), objectPrefab);
     }
 
     //拖拽移动
@@ -133,29 +131,7 @@ public class Card : MonoBehaviour
                 // 把当前物体设置为格子的子物体
                 curGameObject.transform.parent = c.transform;
                 curGameObject.transform.localPosition = Vector3.zero;
-
-                // 动态获取组件并调用方法（组件名 = GameObject 的名字）
-                string componentName = curGameObject.name.Replace("(Clone)", ""); // 假设组件名和 GameObject 名相同
-                Component targetComponent = curGameObject.GetComponent(componentName);
-                //Debug.Log(targetComponent);
-                if (targetComponent != null)
-                {
-                    // 反射调用 "SeccessPlanting" 方法
-                    System.Reflection.MethodInfo method = targetComponent.GetType().GetMethod("SeccessPlanting");
-                    if (method != null)
-                    {
-                        method.Invoke(targetComponent, null); // 调用无参方法
-                    }
-                    else
-                    {
-                        Debug.LogError($"未找到方法: SeccessPlanting");
-                    }
-                }
-                else
-                {
-                    Debug.LogError($"未找到组件: {componentName}");
-                }
-
+                PlantManager.instance.GrowPlants(curGameObject);
                 ChooseCardPanel.instance.UpdateSunNumber(-needSunlightNumber);
                 curGameObject = null; // 清空引用
                 timer = 0;

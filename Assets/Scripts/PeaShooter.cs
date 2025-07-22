@@ -10,7 +10,8 @@ public class PeaShooter : MonoBehaviour
 
     [Header("豌豆射手")]
     [Tooltip("血量")]
-    public int Health;
+    public float HP;
+    public float curHP { set; get; }
     [Tooltip("发射时间间隔")]
     public float interval = 1f;
 

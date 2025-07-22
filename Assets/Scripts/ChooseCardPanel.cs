@@ -12,7 +12,6 @@ public class ChooseCardPanel : MonoBehaviour
     public Text sunNumberText;
     public int sunNumber = 50;
     private Vector3 sunPositionTextPosition;
-    public float x;
 
     [Header("¿¨Æ¬Êý")]
     public int cardNumber;

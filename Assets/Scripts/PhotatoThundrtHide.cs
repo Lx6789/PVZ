@@ -6,7 +6,8 @@ using UnityEngine;
 public class PhotatoThundrtHide : MonoBehaviour
 {
     [Header("ÑªÁ¿")]
-    public int health;
+    public float HP;
+    public float curHP { set; get; }
     [Header("Âñ²ØÊ±¼ä")]
     public float hideTime;
     public float timer;
@@ -28,6 +29,7 @@ public class PhotatoThundrtHide : MonoBehaviour
         if (timer >= hideTime)
         {
             isSuccessPatting = false;
+            isHide = false;
             ChangeStatue();
         }
     }
@@ -36,10 +38,9 @@ public class PhotatoThundrtHide : MonoBehaviour
     private void ChangeStatue()
     {
         animator.SetBool("Isappear", true);
-        isHide = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isHide) return;
         if (collision.gameObject.CompareTag("ZM"))

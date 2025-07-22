@@ -1,50 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WallNut : MonoBehaviour
 {
     [Header("血量")]
-    public int health;
+    public float HP;
     public Animator animator;
-    public float curHelth;
-    
+    public float curHP { get; set; } 
+
     private bool isSuccessPatting = false;
 
     private void Start()
     {
-        curHelth = health;
-        UpdateAnimation(false, false);
+        curHP = HP;
+        ResetAnimation(); // 初始化动画状态
     }
 
     private void Update()
     {
         if (!isSuccessPatting) return;
-        ChackHealth();
+        CheckHealth();
     }
 
-    //判断血量并切换动画
-    private void ChackHealth()
+    // 检测血量并更新动画
+    private void CheckHealth()
     {
-        if (curHelth <= health / 3.0)
-        {
-            UpdateAnimation(false, true);
-        }
-        else if (curHelth <= health / 3.0 * 2)
-        {
-            UpdateAnimation(true, false);
-        } 
-        else if(curHelth <= 0)
-        {
-            Destroy(gameObject);
-        }
+        // 血量分段检测
+        bool isCracked1 = (curHP <= HP * 2f / 3f); // 第一阶段破损
+        bool isCracked2 = (curHP <= HP / 3f);      // 第二阶段破损
+
+        UpdateAnimation(isCracked1, isCracked2);
     }
 
-    //切换动画
-    private void UpdateAnimation(bool isheart1, bool isheart2)
+    // 重置为默认动画状态
+    private void ResetAnimation()
     {
-        animator.SetBool("Isheart1", isheart1);
-        animator.SetBool("Isheart2", isheart2);
+        UpdateAnimation(false, false);
+    }
+
+    // 更新动画状态
+    private void UpdateAnimation(bool isCracked1, bool isCracked2)
+    {
+        animator.SetBool("Isheart1", isCracked1);
+        animator.SetBool("Isheart2", isCracked2);
     }
 
     //确认种植成功

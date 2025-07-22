@@ -11,7 +11,7 @@ public class Pea : MonoBehaviour
     [Tooltip("伤害值")]
     public int damageValue;
     [Tooltip("子弹速度")]
-    public float speed;
+    public int speed;
 
     private void Update()
     {
@@ -22,5 +22,14 @@ public class Pea : MonoBehaviour
     private void BulletsMove()
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("ZM"))
+        {
+            collision.GetComponent<ZM>().TakeDamage(damageValue);
+            Destroy(gameObject);
+        }
     }
 }

@@ -4,7 +4,8 @@ using System.Collections;
 public class Sunflower : MonoBehaviour
 {
     [Header("ÑªÁ¿")]
-    public int health;
+    public float HP;
+    public float curHP { set; get; }
 
     [Header("Ñô¹â")]
     public GameObject sunshinePrefab;

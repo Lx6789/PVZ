@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5148683047545914973}
   - component: {fileID: 1123435127618055699}
   - component: {fileID: 3984967756248434195}
+  - component: {fileID: 8683050979695042521}
   m_Layer: 3
   m_Name: PeaShooter
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +120,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7ba2cdd19d4474a95ea9be46f680cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
-  transmissionTimeInterval: 1
+  HP: 100
+  interval: 1
   gamePrefab: {fileID: 1773875130456672461, guid: 99f162ee6cba6fa4e9cd31ec46f3121a, type: 3}
+--- !u!61 &8683050979695042521
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680565508390144915}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03294444, y: -0.0077516288}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.75, y: 0.75}
+    newSize: {x: 0.75, y: 0.75}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6841111, y: 0.7344967}
+  m_EdgeRadius: 0
