@@ -10,7 +10,7 @@ public class PhotatoThundrtHide : MonoBehaviour
     public float curHP { set; get; }
     [Header("埋藏时间")]
     public float hideTime;
-    public float timer;
+    public float timer = 0;
     [Header("结束隐埋后的动画")]
     public Animator animator;
 

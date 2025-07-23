@@ -7,6 +7,8 @@ using UnityEngine;
 public class SunManager : MonoBehaviour
 {
 
+    public static SunManager instance;
+
     [Header("生产阳光间隔")]
     private float produceTime;
     private float produceTimer;
@@ -16,9 +18,9 @@ public class SunManager : MonoBehaviour
 
     private bool isStartProduce = false;
 
-    private void Start()
+    private void Awake()
     {
-        StartProduce();
+        instance = this;
     }
 
     private void Update()

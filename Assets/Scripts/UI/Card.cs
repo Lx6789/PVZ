@@ -24,6 +24,8 @@ public class Card : MonoBehaviour
     [Header("阳光")]
     public int needSunlightNumber;
 
+    private bool isGameOver = false;
+
     private void Start()
     {
         dark = transform.Find("Dark").gameObject;
@@ -32,6 +34,7 @@ public class Card : MonoBehaviour
 
     private void Update()
     {
+        if (isGameOver) return;
         UpdateCardStatue();
     }
 
@@ -102,6 +105,7 @@ public class Card : MonoBehaviour
     //拖拽开始（鼠标按下）
     public void OnBeginDrag(BaseEventData data)
     {
+        if (isGameOver) return;
         if (!IsCardEnabled()) return;
         PointerEventData pointerEventData = data as PointerEventData;
         curGameObject = PlantManager.instance.CreatePlant(TranslaterScreenToWorld(pointerEventData.position), objectPrefab);
@@ -149,5 +153,10 @@ public class Card : MonoBehaviour
     {
         Vector3 cameraTranslantePos = Camera.main.ScreenToWorldPoint(position);
         return new Vector3(cameraTranslantePos.x, cameraTranslantePos.y, 0);
+    }
+
+    public void SetCardDisenable()
+    {
+        isGameOver = true;
     }
 }

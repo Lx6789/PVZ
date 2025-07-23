@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestryBulletWall : MonoBehaviour
 {
 
-    //销毁子弹
+    //销毁
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 防御性检查
@@ -15,6 +15,10 @@ public class DestryBulletWall : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             // 销毁子弹
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Car"))
+        {
             Destroy(collision.gameObject);
         }
     }

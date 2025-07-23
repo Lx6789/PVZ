@@ -48,4 +48,19 @@ public class ChooseCardPanel : MonoBehaviour
         position.z = 0;
         sunPositionTextPosition = position;
     }
+
+    public void SetGameOver()
+    {
+        Transform childTransform = transform.Find("Cards");
+        if (childTransform != null)
+        {
+            // 获取该子物体下的所有子物体
+            Transform[] subChildren = childTransform.GetComponentsInChildren<Transform>(true);
+
+            foreach (Transform child in subChildren) 
+            {
+                child.gameObject.GetComponent<Card>().SetCardDisenable();
+            }
+        }
+    }
 }

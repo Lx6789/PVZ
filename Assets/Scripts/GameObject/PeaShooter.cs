@@ -66,6 +66,10 @@ public class PeaShooter : MonoBehaviour
             Debug.Log("右侧检测到僵尸", this);
             // 在这里处理检测逻辑
             hasZM = true;
+        } 
+        else
+        {
+            hasZM = false;
         }
 
         // 可视化调试射线

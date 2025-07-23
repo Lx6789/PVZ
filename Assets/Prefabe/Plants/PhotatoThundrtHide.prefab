@@ -96,14 +96,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2476656113661874179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6a871ad5faaad4081918c635a6e9ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 36e2bbd7ff5c4e547ac10a94c0274563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 50
-  hideTime: 10
+  hideTime: 60
   timer: 0
   animator: {fileID: 7960868865768236874}
-  isSuccessPatting: 1
+  isSuccessPatting: 0
 --- !u!70 &6373348421705981386
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

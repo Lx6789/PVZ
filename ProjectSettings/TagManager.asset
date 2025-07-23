@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - ZM
   - Plant
+  - Car
   layers:
   - Default
   - TransparentFX

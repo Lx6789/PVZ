@@ -11,9 +11,8 @@ public class Sunshine : MonoBehaviour
     [Header("阳光数值")]
     public int sunshineNumber;
 
-    [Header("移动目标位置")]
-    public Vector3 position;
-    public float moveDuration = 1f; // 移动持续时间（秒）
+    [Header("移动持续时间（秒）")]
+    public float moveDuration = 1f;
 
     private bool isMoving = false;
 

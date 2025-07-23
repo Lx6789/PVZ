@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7458206485987592864}
   - component: {fileID: 5148683047545914973}
   - component: {fileID: 1123435127618055699}
-  - component: {fileID: 3984967756248434195}
   - component: {fileID: 8683050979695042521}
+  - component: {fileID: 3724747983911948820}
   m_Layer: 3
   m_Name: PeaShooter
   m_TagString: Plant
@@ -108,25 +108,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3984967756248434195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4680565508390144915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7ba2cdd19d4474a95ea9be46f680cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 100
-  interval: 2
-  gamePrefab: {fileID: 1773875130456672461, guid: 99f162ee6cba6fa4e9cd31ec46f3121a, type: 3}
-  detectDistance: 13
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!61 &8683050979695042521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,3 +153,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6841111, y: 0.7344967}
   m_EdgeRadius: 0
+--- !u!114 &3724747983911948820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680565508390144915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d8e3834bba0084a93bf2735f40c853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 100
+  interval: 10
+  gamePrefab: {fileID: 1773875130456672461, guid: 99f162ee6cba6fa4e9cd31ec46f3121a, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64

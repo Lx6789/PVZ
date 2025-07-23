@@ -118,15 +118,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5029773794093088688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b5490cda16f544089f7652829b534c, type: 3}
+  m_Script: {fileID: 11500000, guid: 66572b19f920fa045a82675fcb06527b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2d: {fileID: -744138214793659482}
   animator: {fileID: 4993705393190366205}
-  moveSpeed: 1
+  moveSpeed: 2
   attackPower: 10
   maxHealth: 300
-  attackInterval: 1
+  attackInterval: 10
 --- !u!50 &-744138214793659482
 Rigidbody2D:
   serializedVersion: 4
