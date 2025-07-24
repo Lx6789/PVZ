@@ -11,7 +11,7 @@ public class PlantManager : MonoBehaviour
     // 修改植物血量（通过反射）
     public void TakeDamage(float damage, GameObject plant, GameObject zm)
     {
-        Component targetComponent = DynamicCallComponent(plant);
+        Component targetComponent = GameManager.Instance.DynamicCallComponent(plant);
         if (targetComponent == null)
         {
             Debug.LogError("未找到有效组件", plant);
@@ -55,35 +55,61 @@ public class PlantManager : MonoBehaviour
     // 种植植物
     public void GrowPlants(GameObject plant)
     {
-        Component targetComponent = DynamicCallComponent(plant);
-        DynamicCallMethod(targetComponent, "SeccessPlanting");
+        plant.transform.parent = transform;
+        Component targetComponent = GameManager.Instance.DynamicCallComponent(plant);
+        GameManager.Instance.DynamicCallMethod(targetComponent, "SeccessPlanting");
         plant.GetComponent<Collider2D>().enabled = true;
     }
 
-    // 动态获取组件
-    private Component DynamicCallComponent(GameObject plant)
+    public void PlantStopGame()
     {
-        string componentName = GetPlantName(plant);
-        Component component = plant.GetComponent(componentName)
-                           ?? plant.GetComponentInChildren(Type.GetType(componentName));
-
-        if (component == null)
-            Debug.LogError($"未找到组件: {componentName}", plant);
-
-        return component;
+        foreach (Transform child in transform)
+        {
+            Component plantComponent = GameManager.Instance.DynamicCallComponent(child.gameObject);
+            if (plantComponent != null)
+            {
+                // 检查是否是 MonoBehaviour（可禁用的脚本）
+                MonoBehaviour script = plantComponent as MonoBehaviour;
+                if (script != null)
+                {
+                    script.enabled = false; // 禁用脚本
+                    Debug.Log($"已禁用 {child.name} 上的 {script.GetType().Name} 脚本");
+                }
+                else
+                {
+                    Debug.LogWarning($"{child.name} 上的 {plantComponent.GetType().Name} 不是可禁用脚本");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"在 {child.name} 上未找到目标组件");
+            }
+        }
     }
 
-    // 反射调用方法
-    private void DynamicCallMethod(Component target, string methodName)
+    public void PlantContinueGame()
     {
-        MethodInfo method = target?.GetType().GetMethod(methodName);
-        if (method != null)
-            method.Invoke(target, null);
-        else
-            Debug.LogError($"未找到方法: {methodName}", target?.gameObject);
+        foreach (Transform child in transform)
+        {
+            Component plantComponent = GameManager.Instance.DynamicCallComponent(child.gameObject);
+            if (plantComponent != null)
+            {
+                // 检查是否是 MonoBehaviour（可禁用的脚本）
+                MonoBehaviour script = plantComponent as MonoBehaviour;
+                if (script != null)
+                {
+                    script.enabled = true; // 禁用脚本
+                    Debug.Log($"已禁用 {child.name} 上的 {script.GetType().Name} 脚本");
+                }
+                else
+                {
+                    Debug.LogWarning($"{child.name} 上的 {plantComponent.GetType().Name} 不是可禁用脚本");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"在 {child.name} 上未找到目标组件");
+            }
+        }
     }
-
-    // 获取规范化的组件名
-    private string GetPlantName(GameObject plant) =>
-        plant.name.Replace("(Clone)", "").Trim();
 }

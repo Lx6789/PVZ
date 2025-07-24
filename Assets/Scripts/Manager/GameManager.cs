@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
+using System.Reflection;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +47,24 @@ public class GameManager : MonoBehaviour
     {
         if (isGameEnd) return;
         isGameEnd = true;
+        GameStop();
         failUI.Show();
+    }
+
+    public void GameStop()
+    {
+        chooseCardPanel.GetComponent<ChooseCardPanel>().CardStopGame();
+        SunManager.instance.SunStopGame();
+        ZMManager.Instance.ZMStopGame();
+        BulletManager.instance.BulletStopGame();
+    }
+
+    public void GameContinue()
+    {
+        chooseCardPanel.GetComponent<ChooseCardPanel>().CardContinueGame();
+        SunManager.instance.SunContinueGame();
+        ZMManager.Instance.ZMContinueGame();
+        BulletManager.instance.BulletContinueGame();
     }
 
     private void ShowReadyUI()
@@ -61,4 +80,31 @@ public class GameManager : MonoBehaviour
         shovel.SetActive(true);
         stopButton.SetActive(true);
     }
+
+    // 动态获取组件
+    public Component DynamicCallComponent(GameObject obj)
+    {
+        string componentName = GetPlantName(obj);
+        Component component = obj.GetComponent(componentName)
+                           ?? obj.GetComponentInChildren(Type.GetType(componentName));
+
+        if (component == null)
+            Debug.LogError($"未找到组件: {componentName}", obj);
+
+        return component;
+    }
+
+    // 反射调用方法
+    public void DynamicCallMethod(Component target, string methodName)
+    {
+        MethodInfo method = target?.GetType().GetMethod(methodName);
+        if (method != null)
+            method.Invoke(target, null);
+        else
+            Debug.LogError($"未找到方法: {methodName}", target?.gameObject);
+    }
+
+    // 获取规范化的组件名
+    public string GetPlantName(GameObject plant) =>
+        plant.name.Replace("(Clone)", "").Trim();
 }

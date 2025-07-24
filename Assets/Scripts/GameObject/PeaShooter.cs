@@ -29,8 +29,6 @@ public class PeaShooter : MonoBehaviour
     [Tooltip("检测层级")]
     public LayerMask targetLayer;
 
-    private GameObject curGamePrefab;
-
     private bool hasZM = false;
 
     private void Awake()
@@ -91,12 +89,7 @@ public class PeaShooter : MonoBehaviour
     public void CreatePea()
     {
         // 实例化预制体
-        curGamePrefab = Instantiate(gamePrefab);
-
-        // 设置父物体和位置（与当前脚本所在对象对齐）
-        curGamePrefab.transform.SetParent(transform);
-        // 应用本地位置偏移（相对于父对象）
-        curGamePrefab.transform.localPosition = new Vector3(0.4f, 0.2f, 0);
+        BulletManager.instance.SpawnPea(gamePrefab, transform.position);
     }
 
     //确认种植成功

@@ -24,7 +24,10 @@ public class Card : MonoBehaviour
     [Header("阳光")]
     public int needSunlightNumber;
 
-    private bool isGameOver = false;
+    [Header("引用")]
+    public GameObject plantManager;
+
+    private bool isStop = false;
 
     private void Start()
     {
@@ -34,7 +37,7 @@ public class Card : MonoBehaviour
 
     private void Update()
     {
-        if (isGameOver) return;
+        if (isStop) return;
         UpdateCardStatue();
     }
 
@@ -105,7 +108,7 @@ public class Card : MonoBehaviour
     //拖拽开始（鼠标按下）
     public void OnBeginDrag(BaseEventData data)
     {
-        if (isGameOver) return;
+        if (isStop) return;
         if (!IsCardEnabled()) return;
         PointerEventData pointerEventData = data as PointerEventData;
         curGameObject = PlantManager.instance.CreatePlant(TranslaterScreenToWorld(pointerEventData.position), objectPrefab);
@@ -130,12 +133,13 @@ public class Card : MonoBehaviour
 
         foreach (Collider2D c in col)
         {
-            if (c.tag == "Land" && c.transform.childCount == 0)
+            if (c.tag == "Land" && !c.GetComponent<Box>().isPlaned)
             {
                 // 把当前物体设置为格子的子物体
-                curGameObject.transform.parent = c.transform;
-                curGameObject.transform.localPosition = Vector3.zero;
+                //curGameObject.transform.parent = c.transform;
+                curGameObject.transform.localPosition = c.transform.position;         
                 PlantManager.instance.GrowPlants(curGameObject);
+                c.GetComponent<Box>().isPlaned = true;
                 ChooseCardPanel.instance.UpdateSunNumber(-needSunlightNumber);
                 curGameObject = null; // 清空引用
                 timer = 0;
@@ -155,8 +159,13 @@ public class Card : MonoBehaviour
         return new Vector3(cameraTranslantePos.x, cameraTranslantePos.y, 0);
     }
 
-    public void SetCardDisenable()
+    public void StopGame()
     {
-        isGameOver = true;
+        isStop = true;
+    }
+
+    public void ContinueGame()
+    {
+        isStop = false;
     }
 }

@@ -25,6 +25,7 @@ public class ZM : MonoBehaviour
     private bool isDead = false;     // 是否死亡
     private bool canMove = true;    // 是否可以移动
     private bool isAttacking = false; // 是否正在攻击
+    private bool canAttack = true;
     private GameObject currentTarget; // 当前攻击目标
     private Coroutine attackCoroutine; // 攻击协程
 
@@ -53,6 +54,7 @@ public class ZM : MonoBehaviour
 
         if (collision.CompareTag("Plant"))  // 如果碰到植物
         {
+            if (!canMove) return;
             StartAttack(collision.gameObject);  // 开始攻击
         }
     }
@@ -146,5 +148,19 @@ public class ZM : MonoBehaviour
         animator.SetBool("Wark", isWalking);  // 设置行走状态
         animator.SetBool("Eat", isEating);    // 设置进食状态
         animator.SetBool("Dead", isDead);     // 设置死亡状态
+    }
+
+    public void StopGame()
+    {
+        canMove = false;
+        animator.speed = 0f;
+        canAttack = false;
+    }
+
+    public void ContinueGame()
+    {
+        canMove = true;
+        animator.speed = 1f;
+        canAttack = true;
     }
 }

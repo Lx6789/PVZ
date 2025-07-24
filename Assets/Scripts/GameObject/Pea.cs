@@ -13,8 +13,11 @@ public class Pea : MonoBehaviour
     [Tooltip("×Óµ¯ËÙ¶È")]
     public int speed;
 
+    private bool isStop = false;
+
     private void Update()
     {
+        if (isStop) return;
         BulletsMove();
     }
 
@@ -31,5 +34,15 @@ public class Pea : MonoBehaviour
             collision.GetComponent<ZM>().TakeDamage(damageValue);
             Destroy(gameObject);
         }
+    }
+
+    public void StopGame()
+    {
+        isStop = true;
+    }
+
+    public void ContinueGame()
+    {
+        isStop = false;
     }
 }

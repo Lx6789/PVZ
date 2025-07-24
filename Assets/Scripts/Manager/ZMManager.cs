@@ -42,6 +42,7 @@ public class ZMManager : MonoBehaviour // 类名更清晰（避免缩写ZM）
     private SpawnState spawnState = SpawnState.NotStarted;
     private float timer;
     private bool isStart = false;
+    private bool isStop = false;
 
     private void Awake()
     {
@@ -55,6 +56,8 @@ public class ZMManager : MonoBehaviour // 类名更清晰（避免缩写ZM）
 
     private void Update()
     {
+
+        if (isStop) return;
         if (!isStart) return;
         if (spawnState != SpawnState.NotStarted) return;
 
@@ -113,12 +116,40 @@ public class ZMManager : MonoBehaviour // 类名更清晰（避免缩写ZM）
         GameObject zombiePrefab = wave.zombiePrefabs[randomZombieIndex];
 
         GameObject zombie = Instantiate(zombiePrefab, spawnPoint.position, Quaternion.identity);
+        zombie.transform.parent = transform;
 
         // 设置渲染排序
         var renderer = zombie.GetComponent<SpriteRenderer>();
         if (renderer != null)
         {
             renderer.sortingOrder = 100 - randomPointIndex;
+        }
+    }
+
+    //游戏暂停
+    public void ZMStopGame()
+    {
+        isStop = true;
+        
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.CompareTag("ZM"))
+            {
+                child.gameObject.GetComponent<ZM>().StopGame();
+            }
+        }
+    }
+
+    public void ZMContinueGame()
+    {
+        isStop = false;
+
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.CompareTag("ZM"))
+            {
+                child.gameObject.GetComponent<ZM>().ContinueGame();
+            }
         }
     }
 }

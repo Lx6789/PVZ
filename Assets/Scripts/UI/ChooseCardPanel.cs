@@ -49,17 +49,26 @@ public class ChooseCardPanel : MonoBehaviour
         sunPositionTextPosition = position;
     }
 
-    public void SetGameOver()
+    public void CardStopGame()
     {
         Transform childTransform = transform.Find("Cards");
         if (childTransform != null)
         {
-            // 获取该子物体下的所有子物体
-            Transform[] subChildren = childTransform.GetComponentsInChildren<Transform>(true);
-
-            foreach (Transform child in subChildren) 
+            foreach (Transform child in childTransform) 
             {
-                child.gameObject.GetComponent<Card>().SetCardDisenable();
+                child.gameObject.GetComponent<Card>().StopGame();
+            }
+        }
+    }
+
+    public void CardContinueGame()
+    {
+        Transform childTransform = transform.Find("Cards");
+        if (childTransform != null)
+        {
+            foreach (Transform child in childTransform)
+            {
+                child.gameObject.GetComponent<Card>().ContinueGame();
             }
         }
     }
