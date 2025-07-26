@@ -65,6 +65,15 @@ public class PlantManager : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            // 获取自身及所有子物体的Animator组件
+            Animator[] animators = GetComponentsInChildren<Animator>(true);
+            foreach (Animator animator in animators)
+            {
+                if (animator != null)
+                {
+                    animator.enabled = false; // 禁用Animator组件
+                }
+            }
             Component plantComponent = GameManager.Instance.DynamicCallComponent(child.gameObject);
             if (plantComponent != null)
             {
@@ -89,6 +98,15 @@ public class PlantManager : MonoBehaviour
 
     public void PlantContinueGame()
     {
+        // 获取自身及所有子物体的Animator组件
+        Animator[] animators = GetComponentsInChildren<Animator>(true);
+        foreach (Animator animator in animators)
+        {
+            if (animator != null)
+            {
+                animator.enabled = true; // 启用Animator组件
+            }
+        }
         foreach (Transform child in transform)
         {
             Component plantComponent = GameManager.Instance.DynamicCallComponent(child.gameObject);

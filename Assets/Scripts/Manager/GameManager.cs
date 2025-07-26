@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         if (isGameEnd) return;
         isGameEnd = true;
         GameStop();
+        VoiceManager.instance.PlayLoseClip(transform.position);
         failUI.Show();
     }
 
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         chooseCardPanel.GetComponent<ChooseCardPanel>().CardStopGame();
         SunManager.instance.SunStopGame();
         ZMManager.Instance.ZMStopGame();
+        PlantManager.instance.PlantStopGame();
         BulletManager.instance.BulletStopGame();
     }
 
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         chooseCardPanel.GetComponent<ChooseCardPanel>().CardContinueGame();
         SunManager.instance.SunContinueGame();
         ZMManager.Instance.ZMContinueGame();
+        PlantManager.instance.PlantContinueGame();
         BulletManager.instance.BulletContinueGame();
     }
 

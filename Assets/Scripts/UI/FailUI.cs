@@ -10,9 +10,13 @@ public class FailUI : MonoBehaviour
     [SerializeField] private Animator animator;
     [Tooltip("UI")]
     public GameObject panel;
+    [Tooltip(" ß∞‹√Ê∞Â")]
+    public GameObject gameOverPanel;
     
     private void Hide()
     {
+        panel.SetActive(false);
+        gameOverPanel.SetActive(true);
         animator.enabled = false;
     }
 
@@ -21,5 +25,4 @@ public class FailUI : MonoBehaviour
         panel.SetActive(true);
         animator.enabled = true;
     }
-
 }

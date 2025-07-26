@@ -19,6 +19,7 @@ public class BulletManager : MonoBehaviour
         position.y += 0.2f;
         GameObject curGamePrefab = Instantiate(peaPrefab);
         curGamePrefab.transform.position = position;
+        curGamePrefab.transform.parent = transform;
         return curGamePrefab;
     }
 
